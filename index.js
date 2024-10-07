@@ -35,6 +35,15 @@ app.post("/add-product", async (req, res) =>{
     let product = new Product(req.body)
     let result = await product.save();
     res.send(result)
+});
+
+app.get("/products", async (req, res)=>{
+    let product = await Product.find();
+    if(product.length>0){
+        res.send(product)
+    }else{
+        console.log({result:"User not found"})
+    }
 })
 
 app.listen(5000);
