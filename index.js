@@ -47,8 +47,19 @@ app.get("/products", async (req, res)=>{
 });
 
 app.delete("/product/:id",async (req, res) =>{
-  const result = await Product.deleteOne({_id:req.params.id})
-  res.send(result);
+    const result = await Product.deleteOne({_id:req.params.id})
+    res.send(result);
+});
+
+app.put("/update/:_id", async (req, res) => {
+    console.log(req.params)
+    const data = await Product.updateOne(
+        req.params,
+        {
+            $set:req.body
+        }
+    )
+    res.send(data)
 })
 
 app.listen(5000);
